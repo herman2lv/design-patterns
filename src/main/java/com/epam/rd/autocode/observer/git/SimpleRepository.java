@@ -10,12 +10,12 @@ public class SimpleRepository implements Repository {
     private final List<Event> events = new ArrayList<>();
 
     @Override
-    public void addWebHook(WebHook webHook) {
+    public void addWebHook(final WebHook webHook) {
         webHooks.add(webHook);
     }
 
     @Override
-    public Commit commit(String branch, String author, String[] changes) {
+    public Commit commit(final String branch, final String author, final String[] changes) {
         Commit commit = new Commit(author, changes);
         Event event = new Event(Event.Type.COMMIT, branch, Collections.singletonList(commit));
         events.add(event);
@@ -26,7 +26,7 @@ public class SimpleRepository implements Repository {
     }
 
     @Override
-    public void merge(String sourceBranch, String targetBranch) {
+    public void merge(final String sourceBranch, final String targetBranch) {
         List<Commit> commitsOnTargetBranch = getCommitsFromBranch(targetBranch);
         List<Commit> commitsOnSourceBranch = getCommitsFromBranch(sourceBranch);
         commitsOnSourceBranch.removeAll(commitsOnTargetBranch);
@@ -40,7 +40,7 @@ public class SimpleRepository implements Repository {
         }
     }
 
-    private List<Commit> getCommitsFromBranch(String branch) {
+    private List<Commit> getCommitsFromBranch(final String branch) {
         return events.stream()
                 .filter(e -> e.branch().equalsIgnoreCase(branch))
                 .map(Event::commits)

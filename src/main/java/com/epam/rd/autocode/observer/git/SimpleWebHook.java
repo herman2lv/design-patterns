@@ -29,7 +29,7 @@ public class SimpleWebHook implements WebHook {
     }
 
     @Override
-    public void onEvent(Event event) {
+    public void onEvent(final Event event) {
         if (event.type() == type && event.branch().equalsIgnoreCase(branch)) {
             caughtEvents.add(event);
         }

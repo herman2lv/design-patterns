@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 public class EvenElementsListDecorator<T> implements ListDecorator<T> {
     private final List<T> list;
 
-    public EvenElementsListDecorator(List<T> list) {
+    public EvenElementsListDecorator(final List<T> list) {
         this.list = list;
     }
 
