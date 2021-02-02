@@ -54,8 +54,12 @@ public class Event {
 
     @Override
     public String toString() {
+        String branch = this.branch;
+        if (type == Type.MERGE) {
+            branch = "branch";
+        }
         return new StringJoiner(", ", Event.class.getSimpleName() + "[", "]")
-                .add(type.toString())
+                .add(Type.COMMIT.toString())
                 .add(branch)
                 .add(commits.toString())
                 .toString();
